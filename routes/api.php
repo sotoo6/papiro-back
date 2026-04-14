@@ -6,6 +6,9 @@ use App\Http\Controllers\Api\ProductoController;
 use App\Http\Controllers\Api\DireccionController;
 use App\Http\Controllers\Api\CarritoController;
 use App\Http\Controllers\Api\PedidoController;
+use App\Http\Controllers\Api\Admin\AdminProductoController;
+use App\Http\Controllers\Api\Admin\AdminPedidoController;
+use App\Http\Controllers\Api\Admin\AdminUsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -109,4 +112,50 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Devuelve un pedido concreto del usuario autenticado.
     Route::get('/pedidos/{id}', [PedidoController::class, 'show']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Rutas de administración
+|--------------------------------------------------------------------------
+|
+| Estas rutas requieren autenticación y rol admin o superadmin.
+|
+*/
+Route::middleware(['auth:sanctum', 'role:admin,superadmin'])->prefix('admin')->group(function () {
+    // Lista todos los productos para administración.
+    Route::get('/productos', [AdminProductoController::class, 'index']);
+
+    // Muestra un producto concreto para administración.
+    Route::get('/productos/{id}', [AdminProductoController::class, 'show']);
+
+    // Crea un nuevo producto.
+    Route::post('/productos', [AdminProductoController::class, 'store']);
+
+    // Actualiza un producto existente.
+    Route::post('/productos/{id}', [AdminProductoController::class, 'update']);
+
+    // Elimina un producto.
+    Route::delete('/productos/{id}', [AdminProductoController::class, 'destroy']);
+
+    // Lista todos los pedidos para administración.
+    Route::get('/pedidos', [AdminPedidoController::class, 'index']);
+
+    // Muestra un pedido concreto para administración.
+    Route::get('/pedidos/{id}', [AdminPedidoController::class, 'show']);
+
+    // Actualiza el estado de un pedido.
+    Route::patch('/pedidos/{id}/estado', [AdminPedidoController::class, 'updateEstado']);
+
+    // Lista todos los usuarios para administración.
+    Route::get('/usuarios', [AdminUsuarioController::class, 'index']);
+
+    // Muestra un usuario concreto para administración.
+    Route::get('/usuarios/{id}', [AdminUsuarioController::class, 'show']);
+
+    // Activa o desactiva un usuario.
+    Route::patch('/usuarios/{id}/estado', [AdminUsuarioController::class, 'updateEstado']);
+
+    // Crea un nuevo administrador.
+    Route::post('/usuarios/admin', [AdminUsuarioController::class, 'storeAdmin']);
 });
