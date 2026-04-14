@@ -29,6 +29,7 @@ class Factura extends Model
         'idPedido',
         'fechaEmision',
         'numeroFactura',
+        'rutaPdf',
     ];
 
     /**
@@ -39,6 +40,27 @@ class Factura extends Model
     protected $casts = [
         'fechaEmision' => 'date',
     ];
+
+    /**
+     * Atributos calculados que se añadirán al JSON.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = ['pdf_url'];
+
+    /**
+     * Devuelve la URL pública del PDF de la factura.
+     *
+     * @return string|null
+     */
+    public function getPdfUrlAttribute(): ?string
+    {
+        if (!$this->rutaPdf) {
+            return null;
+        }
+
+        return asset('storage/' . $this->rutaPdf);
+    }
 
     /**
      * Relación: una factura pertenece a un pedido.
