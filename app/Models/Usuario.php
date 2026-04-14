@@ -19,14 +19,14 @@ class Usuario extends Authenticatable
     protected $table = 'usuarios';
 
     /**
-     * Clave primaria personalizada de la tabla.
+     * Clave primaria personalizada.
      *
      * @var string
      */
     protected $primaryKey = 'idUsuario';
 
     /**
-     * Campos que se pueden asignar de forma masiva.
+     * Campos asignables de forma masiva.
      *
      * @var array<int, string>
      */
@@ -42,7 +42,7 @@ class Usuario extends Authenticatable
     ];
 
     /**
-     * Campos que no deben aparecer normalmente en JSON.
+     * Campos que no deben mostrarse normalmente en JSON.
      *
      * @var array<int, string>
      */
@@ -63,6 +63,9 @@ class Usuario extends Authenticatable
 
     /**
      * Indica a Laravel qué campo debe usar como contraseña.
+     *
+     * En este proyecto la contraseña se guarda en "passwordHash"
+     * y no en el campo por defecto "password".
      *
      * @return string
      */
