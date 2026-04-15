@@ -1,58 +1,248 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Papiro
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Papiro es una tienda online de papelería desarrollada como proyecto final.  
+El sistema permite consultar productos, registrarse, gestionar direcciones, usar un carrito de compra, realizar pedidos y administrar el catálogo y los pedidos desde un panel interno.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Resumen del proyecto
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+El proyecto está dividido en dos partes principales:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Backend** desarrollado con **Laravel**, encargado de la lógica de negocio, acceso a base de datos, autenticación, gestión de pedidos y generación de facturas en PDF.
+- **Frontend** desarrollado con **Angular**, centrado en la experiencia de usuario y en la interacción con la API.
 
-## Learning Laravel
+El backend expone una **API REST** que permite trabajar con clientes, direcciones, carrito, pedidos, administración de productos, gestión de usuarios y generación de facturas.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Tecnologías utilizadas
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### Backend
+- Laravel
+- PHP
+- MySQL
+- Docker
+- Laravel Sanctum
+- DomPDF
 
-## Agentic Development
+### Frontend
+- Angular
+- TypeScript
+- HTML
+- CSS / Tailwind CSS
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
+
+## Funcionalidades principales
+
+### Zona pública
+- Listado de productos
+- Detalle de producto
+- Listado de categorías
+- Filtros y búsqueda
+
+### Zona cliente
+- Registro e inicio de sesión
+- Gestión de direcciones
+- Gestión de carrito
+- Creación de pedidos
+- Consulta de pedidos
+- Descarga de factura en PDF
+
+### Zona administración
+- Gestión de productos
+- Gestión de pedidos
+- Cambio de estado de pedidos
+- Gestión de usuarios
+- Creación de administradores por parte del superadministrador
+
+---
+
+## Instalación y puesta en marcha
+
+### 1. Clonar el repositorio
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone <URL_DEL_REPOSITORIO>
+cd papiro-back
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Instalar dependencias de PHP
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Configurar el archivo .env
+Crear una copia del archivo de ejemplo:
 
-## Code of Conduct
+```bash
+cp .env.example .env
+```
+Después, configurar los datos de la base de datos.
+Ejemplo:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3307
+DB_DATABASE=papiro
+DB_USERNAME=papiro_user
+DB_PASSWORD=papiro_pass
+```
+También se recomienda:
 
-## Security Vulnerabilities
+```bash
+CACHE_STORE=file
+SESSION_DRIVER=file
+QUEUE_CONNECTION=sync
+APP_TIMEZONE=Europe/Madrid
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Levantar la base de datos con Docker
 
-## License
+```bash
+docker compose up -d
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 5. Generar clave de aplicación
+```bash
+php artisan key:generate
+```
+
+### 6. Ejecutar migraciones y seeders
+```bash
+php artisan migrate:fresh --seed
+```
+
+### 7. Crear enlace simbólico para los archivos públicos
+```bash
+php artisan storage:link
+```
+
+### 8. Iniciar el servidor
+```bash
+php artisan serve
+```
+
+El backend quedará disponible en:
+
+```bash
+http://127.0.0.1:8000
+```
+
+# Usuarios de prueba
+## Cliente
+Email: lucia@email.com
+Contraseña: 12345678
+
+## Administrador
+Email: admin@papiro.com
+Contraseña: admin1234
+
+### Superadministrador
+Email: superadmin@papiro.com
+Contraseña: super1234
+
+# Endpoints principales
+## Catálogo público
+`GET /api/productos`
+`GET /api/productos/{id}`
+`GET /api/categorias`
+`GET /api/categorias/{id}`
+
+## Autenticación
+`POST /api/register`
+`POST /api/login`
+`POST /api/logout`
+`GET /api/me`
+
+## Direcciones
+`GET /api/direcciones`
+`POST /api/direcciones/{id}`
+`GET /api/direcciones/{id}`
+`PUT /api/direcciones/{id}`
+`DELETE /api/direcciones/{id}`
+`PATCH /api/direcciones/{id}/principal`
+
+## Carrito
+`GET /api/carrito`
+`POST /api/carrito/items`
+`PUT /api/carrito/items/{id}`
+`DELETE /api/carrito/items/{id}`
+`DELETE /api/carrito/vaciar`
+
+## Pedidos
+`POST /api/pedidos`
+`GET /api/pedidos`
+`GET /api/pedidos/{id}`
+
+## Administración
+`GET /api/admin/productos`
+`POST /api/admin/productos`
+`POST /api/admin/productos/{id}`
+`DELETE /api/admin/productos/{id}`
+`GET /api/admin/pedidos`
+`PATCH /api/admin/pedidos/{id}/estado`
+`GET /api/admin/usuarios`
+`PATCH /api/admin/usuarios/{id}/estado`
+`POST /api/admin/usuarios/admin`
+
+# Estructura del proyecto
+
+```
+app/
+ ├── Http/
+ │   ├── Controllers/Api
+ │   ├── Middleware
+ │   └── Requests
+ ├── Models
+
+database/
+ ├── migrations
+ └── seeders
+
+resources/
+ └── views/pdf
+
+routes/
+ ├── api.php
+ └── web.php
+```
+#Facturas PDF
+
+Cuando un pedido cambia a un estado de validación definido por la lógica de negocio, se genera automáticamente una factura en PDF.
+La factura:
+
+- se guarda en base de datos
+- genera un número de factura único
+- almacena la ruta del archivo PDF
+- puede exponerse al frontend para su descarga
+
+Los archivos PDF se almacenan en:
+```bash
+storage/app/public/facturas
+```
+Y son accesibles públicamente a través de:
+```bash
+/storage/facturas/...
+```
+
+# Estado del proyecto
+El backend se encuentra funcionalmente completado, incluyendo:
+
+- autenticación
+- catálogo
+- direcciones
+- carrito
+- pedidos
+- administración
+- generación de facturas PDF
+
+Las mejoras futuras pueden centrarse en:
+
+- paneles de estadísticas
+- mejoras visuales del frontend
+- optimización de filtros y búsquedas
+- nuevas funcionalidades para el perfil del usuario
