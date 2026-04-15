@@ -147,47 +147,47 @@ Contraseña: super1234
 
 # Endpoints principales
 ## Catálogo público
-`GET /api/productos`
-`GET /api/productos/{id}`
-`GET /api/categorias`
-`GET /api/categorias/{id}`
+- `GET /api/productos`
+- `GET /api/productos/{id}`
+- `GET /api/categorias`
+- `GET /api/categorias/{id}`
 
 ## Autenticación
-`POST /api/register`
-`POST /api/login`
-`POST /api/logout`
-`GET /api/me`
+- `POST /api/register`
+- `POST /api/login`
+- `POST /api/logout`
+- `GET /api/me`
 
 ## Direcciones
-`GET /api/direcciones`
-`POST /api/direcciones/{id}`
-`GET /api/direcciones/{id}`
-`PUT /api/direcciones/{id}`
-`DELETE /api/direcciones/{id}`
-`PATCH /api/direcciones/{id}/principal`
+- `GET /api/direcciones`
+- `POST /api/direcciones/{id}`
+- `GET /api/direcciones/{id}`
+- `PUT /api/direcciones/{id}`
+- `DELETE /api/direcciones/{id}`
+- `PATCH /api/direcciones/{id}/principal`
 
 ## Carrito
-`GET /api/carrito`
-`POST /api/carrito/items`
-`PUT /api/carrito/items/{id}`
-`DELETE /api/carrito/items/{id}`
-`DELETE /api/carrito/vaciar`
+- `GET /api/carrito`
+- `POST /api/carrito/items`
+- `PUT /api/carrito/items/{id}`
+- `DELETE /api/carrito/items/{id}`
+- `DELETE /api/carrito/vaciar`
 
 ## Pedidos
-`POST /api/pedidos`
-`GET /api/pedidos`
-`GET /api/pedidos/{id}`
+- `POST /api/pedidos`
+- `GET /api/pedidos`
+- `GET /api/pedidos/{id}`
 
 ## Administración
-`GET /api/admin/productos`
-`POST /api/admin/productos`
-`POST /api/admin/productos/{id}`
-`DELETE /api/admin/productos/{id}`
-`GET /api/admin/pedidos`
-`PATCH /api/admin/pedidos/{id}/estado`
-`GET /api/admin/usuarios`
-`PATCH /api/admin/usuarios/{id}/estado`
-`POST /api/admin/usuarios/admin`
+- `GET /api/admin/productos`
+- `POST /api/admin/productos`
+- `POST /api/admin/productos/{id}`
+- `DELETE /api/admin/productos/{id}`
+- `GET /api/admin/pedidos`
+- `PATCH /api/admin/pedidos/{id}/estado`
+- `GET /api/admin/usuarios`
+- `PATCH /api/admin/usuarios/{id}/estado`
+- `POST /api/admin/usuarios/admin`
 
 # Estructura del proyecto
 
