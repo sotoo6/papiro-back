@@ -61,6 +61,15 @@ El backend expone una **API REST** que permite trabajar con clientes, direccione
 
 ## Instalación y puesta en marcha
 
+### Requisitos previos
+
+Es necesario tener instalado:
+
+- PHP
+- Composer
+- Docker
+- Git
+
 ### 1. Clonar el repositorio
 
 ```bash
@@ -74,7 +83,8 @@ cd papiro-back
 composer install
 ```
 
-### 3. Configurar el archivo .env
+### 3. Configurar el archivo `.env`
+
 Crear una copia del archivo de ejemplo:
 
 ```bash
@@ -132,20 +142,21 @@ El backend quedará disponible en:
 http://127.0.0.1:8000
 ```
 
-# Usuarios de prueba
-## Cliente
-Email: lucia@email.com
-Contraseña: 12345678
+## Usuarios de prueba
 
-## Administrador
-Email: admin@papiro.com
-Contraseña: admin1234
+### Cliente
+- Email: `lucia@email.com`
+- Contraseña: `12345678`
+
+### Administrador
+- Email: `admin@papiro.com`
+- Contraseña: `admin1234`
 
 ### Superadministrador
-Email: superadmin@papiro.com
-Contraseña: super1234
+- Email: `superadmin@papiro.com`
+- Contraseña: `super1234`
 
-# Endpoints principales
+## Endpoints principales
 ## Catálogo público
 - `GET /api/productos`
 - `GET /api/productos/{id}`
@@ -160,7 +171,7 @@ Contraseña: super1234
 
 ## Direcciones
 - `GET /api/direcciones`
-- `POST /api/direcciones/{id}`
+- `POST /api/direcciones`
 - `GET /api/direcciones/{id}`
 - `PUT /api/direcciones/{id}`
 - `DELETE /api/direcciones/{id}`
@@ -189,7 +200,7 @@ Contraseña: super1234
 - `PATCH /api/admin/usuarios/{id}/estado`
 - `POST /api/admin/usuarios/admin`
 
-# Estructura del proyecto
+## Estructura del proyecto
 
 ```
 app/
@@ -210,7 +221,7 @@ routes/
  ├── api.php
  └── web.php
 ```
-#Facturas PDF
+## Facturas PDF
 
 Cuando un pedido cambia a un estado de validación definido por la lógica de negocio, se genera automáticamente una factura en PDF.
 La factura:
@@ -221,15 +232,17 @@ La factura:
 - puede exponerse al frontend para su descarga
 
 Los archivos PDF se almacenan en:
-```bash
+```md
+```text
 storage/app/public/facturas
 ```
 Y son accesibles públicamente a través de:
-```bash
+```md
+```text
 /storage/facturas/...
 ```
 
-# Estado del proyecto
+## Estado del proyecto
 El backend se encuentra funcionalmente completado, incluyendo:
 
 - autenticación
