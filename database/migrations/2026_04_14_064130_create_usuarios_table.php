@@ -20,8 +20,8 @@ return new class extends Migration
             $table->id('idUsuario');
 
             // Datos personales del usuario
-            $table->string('nombre');
-            $table->string('apellidos');
+            $table->string('nombre', 25);
+            $table->string('apellidos', 50);
             $table->string('email')->unique();
 
             // Contraseña hasheada
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('rol')->default('cliente');
 
             // Teléfono opcional
-            $table->string('telefono', 20)->nullable();
+            $table->string('telefono', 9)->nullable();
 
             // Fecha lógica de registro
             $table->date('fechaRegistro')->nullable();

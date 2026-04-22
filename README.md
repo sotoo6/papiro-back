@@ -1,6 +1,6 @@
 # Papiro
 
-Papiro es una tienda online de papelería desarrollada como proyecto final.  
+Papiro es una tienda online de papelería desarrollada como Trabajo de Fin de Ciclo.
 El sistema permite consultar productos, registrarse, gestionar direcciones, usar un carrito de compra, realizar pedidos y administrar el catálogo y los pedidos desde un panel interno.
 
 ---
@@ -48,7 +48,7 @@ El backend expone una **API REST** que permite trabajar con clientes, direccione
 - Gestión de carrito
 - Creación de pedidos
 - Consulta de pedidos
-- Descarga de factura en PDF
+- Consulta y descarga de facturas en PDF
 
 ### Zona administración
 - Gestión de productos
@@ -233,25 +233,27 @@ La factura:
 
 Los archivos PDF se almacenan en:
 ```md
-```text
 storage/app/public/facturas
 ```
 Y son accesibles públicamente a través de:
 ```md
-```text
 /storage/facturas/...
 ```
 
 ## Estado del proyecto
-El backend se encuentra funcionalmente completado, incluyendo:
+El backend se encuentra funcionalmente completado y validado mediante pruebas manuales en Postman.
 
-- autenticación
-- catálogo
-- direcciones
-- carrito
-- pedidos
-- administración
+## Pruebas realizadas
+
+Se han realizado pruebas manuales de los principales flujos de la aplicación mediante Postman, incluyendo:
+
+- catálogo público
+- registro e inicio de sesión
+- gestión de direcciones
+- gestión de carrito
+- creación de pedidos
 - generación de facturas PDF
+- control de acceso por roles
 
 Las mejoras futuras pueden centrarse en:
 
@@ -259,3 +261,15 @@ Las mejoras futuras pueden centrarse en:
 - mejoras visuales del frontend
 - optimización de filtros y búsquedas
 - nuevas funcionalidades para el perfil del usuario
+
+
+
+
+
+
+
+
+
+
+
+<!-- http://localhost:8081/ -->
