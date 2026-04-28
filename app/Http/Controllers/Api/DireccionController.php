@@ -76,6 +76,7 @@ class DireccionController extends Controller
                 'codigoPostal' => $request->codigoPostal,
                 'calle' => $request->calle,
                 'numeroPortal' => $request->numeroPortal,
+                'piso' => $request->piso,
                 'esPrincipal' => $request->boolean('esPrincipal'),
             ]);
 
@@ -100,10 +101,10 @@ class DireccionController extends Controller
      *
      * Solo permite acceder si la dirección pertenece al usuario.
      *
-     * @param string $id
+     * @param int $id
      * @return JsonResponse
      */
-    public function show(string $id): JsonResponse
+    public function show(int $id): JsonResponse
     {
         try {
             // Se obtiene el usuario autenticado.
@@ -147,10 +148,10 @@ class DireccionController extends Controller
      * Si se marca como principal, primero se desmarcan las demás.
      *
      * @param UpdateDireccionRequest $request
-     * @param string $id
+     * @param int $id
      * @return JsonResponse
      */
-    public function update(UpdateDireccionRequest $request, string $id): JsonResponse
+    public function update(UpdateDireccionRequest $request, int $id): JsonResponse
     {
         try {
             // Se obtiene el usuario autenticado.
@@ -187,6 +188,7 @@ class DireccionController extends Controller
                 'codigoPostal' => $request->codigoPostal,
                 'calle' => $request->calle,
                 'numeroPortal' => $request->numeroPortal,
+                'piso' => $request->piso,
                 'esPrincipal' => $request->boolean('esPrincipal'),
             ]);
 
@@ -211,10 +213,10 @@ class DireccionController extends Controller
      *
      * Solo permite eliminarla si pertenece al usuario.
      *
-     * @param string $id
+     * @param int $id
      * @return JsonResponse
      */
-    public function destroy(string $id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         try {
             // Se obtiene el usuario autenticado.
@@ -258,21 +260,18 @@ class DireccionController extends Controller
      *
      * Primero desmarca el resto de direcciones del usuario.
      *
-     * @param string $id
+     * @param int $id
      * @return JsonResponse
      */
-    public function setPrincipal(string $id): JsonResponse
+    public function setPrincipal(int $id): JsonResponse
     {
         try {
-            // Se obtiene el usuario autenticado.
             $usuario = auth()->user();
 
-            // Se busca la dirección solo entre las del usuario autenticado.
             $direccion = Direccion::where('idUsuario', $usuario->idUsuario)
                 ->where('idDireccion', $id)
                 ->first();
 
-            // Si no existe, se devuelve error 404.
             if (!$direccion) {
                 return response()->json([
                     'success' => false,
@@ -281,14 +280,16 @@ class DireccionController extends Controller
                 ], 404);
             }
 
-            // Se desmarcan todas las direcciones del usuario.
-            Direccion::where('idUsuario', $usuario->idUsuario)
-                ->update(['esPrincipal' => false]);
+            \DB::transaction(function () use ($usuario, $direccion) {
+                Direccion::where('idUsuario', $usuario->idUsuario)
+                    ->update(['esPrincipal' => false]);
 
-            // Se marca como principal la dirección seleccionada.
-            $direccion->update([
-                'esPrincipal' => true
-            ]);
+                $direccion->update([
+                    'esPrincipal' => true
+                ]);
+            });
+
+            $direccion->refresh();
 
             return response()->json([
                 'success' => true,

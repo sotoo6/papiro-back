@@ -34,6 +34,7 @@ class Direccion extends Model
         'codigoPostal',
         'calle',
         'numeroPortal',
+        'piso',
         'esPrincipal',
     ];
 
